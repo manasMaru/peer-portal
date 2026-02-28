@@ -1,0 +1,205 @@
+/* =====================
+   GLOBAL
+===================== */
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 0;
+}
+
+/* =====================
+   CONTAINER
+===================== */
+.container {
+  background: white;
+  padding: 25px;
+  max-width: 800px;
+  margin: 40px auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* =====================
+   AUTH TABS
+===================== */
+.tabs {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  background: #ddd;
+}
+
+.tabs button.active {
+  background: #007bff;
+  color: white;
+}
+
+/* =====================
+   FORM ELEMENTS
+===================== */
+.box input,
+textarea,
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 80px;
+}
+
+.box button {
+  width: 100%;
+  padding: 8px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.box button:hover {
+  background: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+.msg {
+  margin-top: 10px;
+  font-size: 14px;
+  color: red;
+}
+
+/* =====================
+   DASHBOARD
+===================== */
+.dashboard-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.logout {
+  background: #dc3545;
+}
+
+.logout:hover {
+  background: #b02a37;
+}
+
+/* =====================
+   GRIEVANCES
+===================== */
+.grievance {
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  background: #fff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.grievance strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.grievance p {
+  margin: 6px 0;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.grievance.resolved {
+  background-color: #e8f5e9;
+  border-color: #2e7d32;
+}
+
+.grievance.resolved strong {
+  color: #2e7d32;
+}
+
+/* =====================
+   REPLIES
+===================== */
+.reply-box {
+  margin-top: 10px;
+}
+
+.reply-box button {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.reply {
+  font-size: 14px;
+  margin-left: 10px;
+  color: #333;
+}
+
+/* =====================
+   RESOURCES
+===================== */
+.resource {
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+
+.resource img {
+  margin-top: 8px;
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.resource a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* =====================
+   RESOURCE FILTER BUTTONS ✅ FIX
+===================== */
+.resource-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 8px;
+  background: #ddd;        /* normal */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #000;
+}
+
+.filter-btn.active {
+  background: #007bff;     /* active blue */
+  color: white;
+}
+
+.filter-btn:hover {
+  background: #cfd8dc;
+}

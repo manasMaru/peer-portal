@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grievances</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h2>Grievances</h2>
+
+    <!-- ADD GRIEVANCE -->
+    <div class="box">
+      <input type="text" id="gTitle" placeholder="Grievance title" />
+      <textarea id="gDesc" placeholder="Grievance description"></textarea>
+      <button id="addBtn">Add Grievance</button>
+    </div>
+
+    <hr />
+
+    <!-- LIST -->
+    <div id="grievanceList"></div>
+
+    <br />
+    <button id="backBtn">⬅ Back to Dashboard</button>
+  </div>
+
+  <!-- ONLY ONE SCRIPT -->
+  <script src="./grievances.js"></script>
+</body>
+</html>
