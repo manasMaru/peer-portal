@@ -1,8 +1,5 @@
-const API_URL = "http://localhost:3000";
+import { API_URL } from "./config.js";
 
-// =====================
-// LOGIN / SIGNUP ELEMENTS (ONLY IF PRESENT)
-// =====================
 const loginTab = document.getElementById("loginTab");
 const signupTab = document.getElementById("signupTab");
 const loginBox = document.getElementById("loginBox");
@@ -24,37 +21,27 @@ if (loginTab && signupTab) {
   };
 }
 
-// =====================
-// SIGNUP
-// =====================
 async function signup() {
-  const email = document.getElementById("signupEmail")?.value;
-  const password = document.getElementById("signupPassword")?.value;
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
   const msg = document.getElementById("signupMsg");
 
-  if (!email || !password) return;
-
-  const res = await fetch(`${API_URL}/signup`, {
+  const res = await fetch(`${API_URL}/auth/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
   });
 
   const data = await res.json();
-  if (msg) msg.innerText = data.message;
+  msg.innerText = data.message;
 }
 
-// =====================
-// LOGIN
-// =====================
 async function login() {
-  const email = document.getElementById("loginEmail")?.value;
-  const password = document.getElementById("loginPassword")?.value;
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
   const msg = document.getElementById("loginMsg");
 
-  if (!email || !password) return;
-
-  const res = await fetch(`${API_URL}/login`, {
+  const res = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
@@ -65,23 +52,10 @@ async function login() {
   if (data.user_id) {
     localStorage.setItem("user_id", data.user_id);
     window.location.href = "dashboard.html";
-  } else if (msg) {
+  } else {
     msg.innerText = data.message;
   }
 }
 
-// =====================
-// DASHBOARD FUNCTIONS
-// =====================
-function goToGrievances() {
-  window.location.href = "grievances.html";
-}
-
-function goToResources() {
-  window.location.href = "resources.html";
-}
-
-function logout() {
-  localStorage.removeItem("user_id");
-  window.location.href = "login.html";
-}
+window.signup = signup;
+window.login = login;

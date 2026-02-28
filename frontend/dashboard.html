@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Peer Portal - Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
 
@@ -12,12 +12,12 @@
     <p>Welcome to Peer Portal</p>
 
     <div class="dashboard-buttons">
-      <button onclick="goToGrievances()">Grievances</button>
-      <button onclick="goToResources()">Resources</button>
-      <button class="logout" onclick="logout()">Logout</button>
+      <button id="grievancesBtn">Grievances</button>
+      <button id="resourcesBtn">Resources</button>
+      <button id="logoutBtn" class="logout">Logout</button>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script type="module" src="./js/dashboard.js"></script>
 </body>
 </html>

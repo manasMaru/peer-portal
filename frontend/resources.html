@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Resources</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
 
@@ -15,7 +15,7 @@
       <input type="text" id="rTitle" placeholder="Resource title" />
       <textarea id="rDesc" placeholder="Description"></textarea>
 
-      <select id="rType" onchange="toggleFields()">
+      <select id="rType">
         <option value="">Select type</option>
         <option value="physical">Physical</option>
         <option value="digital">Digital</option>
@@ -43,41 +43,25 @@
         class="hidden"
       />
 
-      <button onclick="addResource()">Add Resource</button>
+      <button id="addResourceBtn">Add Resource</button>
     </div>
 
     <hr />
 
     <!-- FILTER BUTTONS -->
     <div class="box resource-filters">
-      <button
-        class="filter-btn active"
-        onclick="setActiveFilter(this, '')"
-      >
-        All
-      </button>
-      <button
-        class="filter-btn"
-        onclick="setActiveFilter(this, 'physical')"
-      >
-        Physical
-      </button>
-      <button
-        class="filter-btn"
-        onclick="setActiveFilter(this, 'digital')"
-      >
-        Digital
-      </button>
+      <button class="filter-btn active" data-type="">All</button>
+      <button class="filter-btn" data-type="physical">Physical</button>
+      <button class="filter-btn" data-type="digital">Digital</button>
     </div>
 
     <!-- LIST -->
     <div id="resourceList"></div>
 
     <br />
-    <button onclick="goBack()">⬅ Back to Dashboard</button>
+    <button id="backBtn">⬅ Back to Dashboard</button>
   </div>
 
-  <!-- IMPORTANT: only resources.js is needed -->
-  <script src="./resources.js"></script>
+  <script type="module" src="./js/resources.js"></script>
 </body>
 </html>
