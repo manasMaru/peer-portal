@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Invalid email or password" });
 
-    res.json({ message: "Login successful", user_id: user.id });
+    res.json({message: "Login successful",user_id: user.id,role: user.role});
   } catch (err) {
   console.error("LOGIN ERROR:", err);
   res.status(500).json({ message: "Login failed" });

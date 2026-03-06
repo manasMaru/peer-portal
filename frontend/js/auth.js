@@ -49,10 +49,11 @@ async function login() {
 
   const data = await res.json();
 
-  if (data.user_id) {
-    localStorage.setItem("user_id", data.user_id);
-    window.location.href = "dashboard.html";
-  } else {
+if (data.user_id) {
+  localStorage.setItem("user_id", data.user_id);
+  localStorage.setItem("role", data.role);  
+  window.location.href = "dashboard.html";
+} else {
     msg.innerText = data.message;
   }
 }
