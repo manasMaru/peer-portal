@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
+const requestRoutes = require("./routes/requestRoutes");
 const authRoutes = require("./routes/authRoutes");
 const grievanceRoutes = require("./routes/grievanceRoutes");
 const replyRoutes = require("./routes/replyRoutes");
@@ -15,6 +16,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/grievances", grievanceRoutes);
 app.use("/api/replies", replyRoutes);
 app.use("/api/resources", resourceRoutes);
+app.use("/api/requests", requestRoutes);
 
 app.get("/", (req, res) => {
   res.send("Peer Portal Backend Running");

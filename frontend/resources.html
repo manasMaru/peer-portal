@@ -10,56 +10,109 @@
   <div class="container">
     <h2>Resources</h2>
 
-    <!-- ADD RESOURCE -->
-    <div class="box">
-      <input type="text" id="rTitle" placeholder="Resource title" />
-      <textarea id="rDesc" placeholder="Description"></textarea>
-
-      <select id="rType">
-        <option value="">Select type</option>
-        <option value="physical">Physical</option>
-        <option value="digital">Digital</option>
-      </select>
-
-      <!-- DIGITAL -->
-      <input
-        type="text"
-        id="rLink"
-        placeholder="Resource link (PDF / Drive)"
-        class="hidden"
-      />
-
-      <!-- PHYSICAL -->
-      <input
-        type="text"
-        id="rImage"
-        placeholder="Image URL of product"
-        class="hidden"
-      />
-      <input
-        type="text"
-        id="rContact"
-        placeholder="Contact details (Phone / Email)"
-        class="hidden"
-      />
-
-      <button id="addResourceBtn">Add Resource</button>
+    <!-- TOGGLE BUTTONS -->
+    <div class="box resource-toggle">
+      <button id="showResourcesBtn" class="active">Available Resources</button>
+      <button id="showRequestsBtn">Resource Requests</button>
     </div>
 
-    <hr />
+    <!-- ============================= -->
+    <!-- RESOURCE SECTION -->
+    <!-- ============================= -->
+    <div id="resourceSection">
 
-    <!-- FILTER BUTTONS -->
-    <div class="box resource-filters">
-      <button class="filter-btn active" data-type="">All</button>
-      <button class="filter-btn" data-type="physical">Physical</button>
-      <button class="filter-btn" data-type="digital">Digital</button>
+      <!-- ADD RESOURCE -->
+      <div class="box">
+        <input type="text" id="rTitle" placeholder="Resource title" />
+        <textarea id="rDesc" placeholder="Description"></textarea>
+
+        <select id="rType">
+          <option value="">Select type</option>
+          <option value="physical">Physical</option>
+          <option value="digital">Digital</option>
+        </select>
+
+        <!-- DIGITAL -->
+        <input
+          type="text"
+          id="rLink"
+          placeholder="Resource link (PDF / Drive)"
+          class="hidden"
+        />
+
+        <!-- PHYSICAL -->
+        <input
+          type="text"
+          id="rImage"
+          placeholder="Image URL of product"
+          class="hidden"
+        />
+        <input
+          type="text"
+          id="rContact"
+          placeholder="Contact details (Phone / Email)"
+          class="hidden"
+        />
+
+        <button id="addResourceBtn">Add Resource</button>
+      </div>
+
+      <hr />
+
+      <!-- FILTER BUTTONS -->
+      <div class="box resource-filters">
+        <button class="filter-btn active" data-type="">All</button>
+        <button class="filter-btn" data-type="physical">Physical</button>
+        <button class="filter-btn" data-type="digital">Digital</button>
+      </div>
+
+      <!-- RESOURCE LIST -->
+      <div id="resourceList"></div>
+
     </div>
 
-    <!-- LIST -->
-    <div id="resourceList"></div>
+    <!-- ============================= -->
+    <!-- REQUEST SECTION -->
+    <!-- ============================= -->
+    <div id="requestSection" class="hidden">
+
+      <div class="box">
+        <h3>Request a Resource</h3>
+
+        <input type="text" id="reqTitle" placeholder="Requested resource title" />
+        <textarea id="reqDesc" placeholder="Describe what you need"></textarea>
+
+        <select id="reqType">
+          <option value="">Select type</option>
+          <option value="physical">Physical</option>
+          <option value="digital">Digital</option>
+        </select>
+
+        <input
+          type="text"
+          id="reqImage"
+          placeholder="Optional image link"
+        />
+
+        <!-- ✅ NEW: REQUESTER CONTACT -->
+        <input
+          type="text"
+          id="reqContact"
+          placeholder="Your contact details (Phone / Email)"
+        />
+
+        <button id="addRequestBtn">Add Request</button>
+      </div>
+
+      <hr />
+
+      <div id="requestList"></div>
+
+    </div>
 
     <br />
     <button id="backBtn">⬅ Back to Dashboard</button>
+
   </div>
 
   <script type="module" src="./js/resources.js"></script>
