@@ -1,0 +1,149 @@
+/* =====================
+   WRAPPER
+===================== */
+
+.dashboard-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eef2f7, #d9e2ec);
+  padding: 20px;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================
+   CARD
+===================== */
+
+.dashboard-card {
+  background: white;
+  padding: 40px;
+  width: 100%;
+  max-width: 540px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+/* =====================
+   HEADER
+===================== */
+
+.dashboard-header h2 {
+  margin-bottom: 6px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.user-info {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #555;
+}
+
+.role-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.role-admin {
+  background: #ffe5e5;
+  color: #c62828;
+}
+
+.role-user {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* =====================
+   GRID
+===================== */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+}
+
+/* =====================
+   ITEMS
+===================== */
+
+.dashboard-item {
+  background: #f9fafc;
+  padding: 25px 10px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid #eee;
+}
+
+.dashboard-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+.dashboard-item .icon {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.dashboard-item .label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =====================
+   LOGOUT SPECIAL
+===================== */
+
+.logout-item {
+  background: #fff5f5;
+}
+
+.logout-item:hover {
+  background: #ffeaea;
+}
+
+/* =====================
+   STUDENT FIX (CORRECT WAY)
+   If admin is hidden,
+   make logout full width
+===================== */
+
+.dashboard-grid .dashboard-item.hidden + .logout-item,
+.dashboard-grid .logout-item:nth-child(3) {
+  grid-column: span 2;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+
+@media (max-width: 500px) {
+  .dashboard-card {
+    padding: 30px 20px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

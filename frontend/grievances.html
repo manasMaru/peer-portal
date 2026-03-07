@@ -3,27 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <title>Grievances</title>
-  <link rel="stylesheet" href="./css/style.css" />
+
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/grievance.css">
 </head>
 <body>
 
-  <div class="container">
-    <h2>Grievances</h2>
+  <div class="page-wrapper">
 
-    <!-- ADD GRIEVANCE -->
-    <div class="box">
-      <input type="text" id="gTitle" placeholder="Grievance title" />
-      <textarea id="gDesc" placeholder="Grievance description"></textarea>
-      <button id="addBtn">Add Grievance</button>
+    <div class="page-card">
+
+      <!-- HEADER -->
+      <div class="page-header">
+        <h2>📢 Grievances</h2>
+        <p class="subtitle">Raise concerns and track responses</p>
+      </div>
+
+      <!-- ADD GRIEVANCE -->
+      <div class="box grievance-form">
+        <input type="text" id="gTitle" placeholder="Grievance title" />
+        <textarea id="gDesc" placeholder="Grievance description"></textarea>
+        <button id="addBtn">Submit Grievance</button>
+      </div>
+
+      <!-- LIST -->
+      <div id="grievanceList" class="grievance-list"></div>
+
+      <!-- BACK BUTTON -->
+      <div class="back-section">
+        <button id="backBtn" class="secondary-btn">⬅ Back to Dashboard</button>
+      </div>
+
     </div>
 
-    <hr />
-
-    <!-- LIST -->
-    <div id="grievanceList"></div>
-
-    <br />
-    <button id="backBtn">⬅ Back to Dashboard</button>
   </div>
 
   <script type="module" src="./js/grievances.js"></script>

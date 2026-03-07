@@ -1,0 +1,106 @@
+/* =====================
+   GLOBAL
+===================== */
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* =====================
+   CONTAINER
+===================== */
+.container {
+  background: white;
+  padding: 30px;
+  max-width: 900px;
+  margin: 50px auto;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* =====================
+   PAGE HEADER
+===================== */
+.page-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.page-header h2 {
+  margin-bottom: 6px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 14px;
+}
+
+/* =====================
+   SECTION SEPARATION
+===================== */
+.box {
+  background: #f9fafc;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* =====================
+   FORM ELEMENTS (GLOBAL)
+===================== */
+.box input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+textarea {
+  height: 90px;
+  resize: vertical;
+}
+
+.box button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.box button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.hidden {
+  display: none;
+}
+
+.msg {
+  margin-top: 10px;
+  font-size: 14px;
+  color: red;
+}

@@ -3,23 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <title>Peer Portal - Dashboard</title>
-  <link rel="stylesheet" href="./css/style.css" />
+
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
 </head>
 <body>
 
-  <div class="container">
-    <h2>Dashboard</h2>
-    <p>Welcome to Peer Portal</p>
+  <div class="dashboard-wrapper">
 
-<div class="dashboard-buttons">
-  <button id="grievancesBtn">Grievances</button>
-  <button id="resourcesBtn">Resources</button>
+    <div class="dashboard-card">
 
-  <!-- Admin Button (hidden by default) -->
-  <button id="adminBtn" style="display: none;">Admin Panel</button>
+      <!-- ================= HEADER ================= -->
+      <div class="dashboard-header">
+        <h2>Peer Portal</h2>
+        <p class="subtitle">Your central access panel</p>
 
-  <button id="logoutBtn" class="logout">Logout</button>
-</div>
+        <div class="user-info">
+          <span class="user-label">Logged in as:</span>
+          <strong id="userEmail">Loading...</strong>
+          <span id="userRole" class="role-badge"></span>
+        </div>
+      </div>
+
+      <!-- ================= GRID ================= -->
+      <div class="dashboard-grid">
+
+        <!-- Grievances -->
+        <div class="dashboard-item" id="grievancesBtn">
+          <div class="icon">📢</div>
+          <div class="label">Grievances</div>
+        </div>
+
+        <!-- Resources -->
+        <div class="dashboard-item" id="resourcesBtn">
+          <div class="icon">📚</div>
+          <div class="label">Resources</div>
+        </div>
+
+        <!-- Admin Panel (hidden by default) -->
+        <div class="dashboard-item hidden" id="adminBtn">
+          <div class="icon">🛠</div>
+          <div class="label">Admin Panel</div>
+        </div>
+
+        <!-- Logout -->
+        <div class="dashboard-item logout-item" id="logoutBtn">
+          <div class="icon">🚪</div>
+          <div class="label">Logout</div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
   <script type="module" src="./js/dashboard.js"></script>

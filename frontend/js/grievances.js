@@ -32,7 +32,6 @@ async function loadGrievances() {
     const div = document.createElement("div");
     div.className = "grievance" + (g.is_resolved ? " resolved" : "");
 
-    // ✅ Owner OR Admin
     const isOwner = g.created_by == userId;
     const isAdmin = userRole === "admin";
 
@@ -42,41 +41,44 @@ async function loadGrievances() {
     div.innerHTML = `
       <strong>${g.title}</strong>
       <p>${g.description}</p>
-      <small>Status: ${g.is_resolved ? "Resolved" : "Open"}</small><br/>
 
-      <input type="text" id="reply-${g.id}" placeholder="Reply..." />
-      <button data-reply="${g.id}">Reply</button>
+      <span class="status-badge ${g.is_resolved ? "status-resolved" : "status-open"}">
+        ${g.is_resolved ? "Resolved" : "Open"}
+      </span>
 
-      ${
-        showResolve
-          ? `<button data-resolve="${g.id}">Mark Resolved</button>`
-          : ""
-      }
+      <div class="action-row">
+        <input type="text" id="reply-${g.id}" placeholder="Write a reply..." />
+        <button class="small-btn reply-btn" data-reply="${g.id}">Reply</button>
 
-      ${
-        showDelete
-          ? `<button data-delete="${g.id}">Delete</button>`
-          : ""
-      }
+        ${
+          showResolve
+            ? `<button class="small-btn resolve-btn" data-resolve="${g.id}">Resolve</button>`
+            : ""
+        }
 
-      <div id="replies-${g.id}"></div>
+        ${
+          showDelete
+            ? `<button class="small-btn delete-btn" data-delete="${g.id}">Delete</button>`
+            : ""
+        }
+      </div>
+
+      <div id="replies-${g.id}" class="reply-container"></div>
     `;
 
     list.appendChild(div);
     loadReplies(g.id);
   });
 
-  // Reply
+  // Attach events
   document.querySelectorAll("[data-reply]").forEach(btn => {
     btn.onclick = () => addReply(btn.dataset.reply);
   });
 
-  // Resolve
   document.querySelectorAll("[data-resolve]").forEach(btn => {
     btn.onclick = () => resolveGrievance(btn.dataset.resolve);
   });
 
-  // Delete
   document.querySelectorAll("[data-delete]").forEach(btn => {
     btn.onclick = () => deleteGrievance(btn.dataset.delete);
   });
@@ -87,10 +89,13 @@ async function loadGrievances() {
 // ADD GRIEVANCE
 // ==============================
 async function addGrievance() {
-  const title = document.getElementById("gTitle").value;
-  const desc = document.getElementById("gDesc").value;
+  const title = document.getElementById("gTitle").value.trim();
+  const desc = document.getElementById("gDesc").value.trim();
 
-  if (!title || !desc) return alert("Fill all fields");
+  if (!title || !desc) {
+    alert("Please fill all fields");
+    return;
+  }
 
   await fetch(`${API_URL}/grievances`, {
     method: "POST",
@@ -114,14 +119,16 @@ async function addGrievance() {
 // ==============================
 async function addReply(id) {
   const input = document.getElementById(`reply-${id}`);
-  if (!input.value) return;
+  const message = input.value.trim();
+
+  if (!message) return;
 
   await fetch(`${API_URL}/replies/${id}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       user_id: userId,
-      message: input.value
+      message
     })
   });
 
@@ -141,16 +148,20 @@ async function loadReplies(id) {
   box.innerHTML = "";
 
   replies.forEach(r => {
-    box.innerHTML += `<p>↳ ${r.email}: ${r.message}</p>`;
+    box.innerHTML += `
+      <div class="reply">
+        <strong>${r.email}</strong><br/>
+        ${r.message}
+      </div>
+    `;
   });
 }
 
 
 // ==============================
-// RESOLVE (OWNER OR ADMIN)
+// RESOLVE
 // ==============================
 async function resolveGrievance(id) {
-
   await fetch(`${API_URL}/grievances/${id}/resolve`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -164,10 +175,9 @@ async function resolveGrievance(id) {
 
 
 // ==============================
-// DELETE (OWNER OR ADMIN)
+// DELETE
 // ==============================
 async function deleteGrievance(id) {
-
   if (!confirm("Are you sure you want to delete this grievance?")) return;
 
   await fetch(`${API_URL}/grievances/${id}`, {

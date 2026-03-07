@@ -1,0 +1,357 @@
+/* =========================
+   PAGE WRAPPER
+========================= */
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #eef2f7, #d9e2ec);
+  padding: 40px 20px;
+}
+
+.page-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 850px;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.page-header h2 {
+  margin-bottom: 6px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 14px;
+}
+
+/* =========================
+   TOGGLE BUTTONS
+========================= */
+
+.resource-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.resource-toggle button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  background: #e0e0e0;
+  transition: all 0.25s ease;
+}
+
+/* Active */
+.resource-toggle button.active {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,123,255,0.35);
+}
+
+/* Hover only if not active */
+.resource-toggle button:not(.active):hover {
+  background: #d0d7de;
+}
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.resource-form {
+  background: #f9fafc;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+  border: 1px solid #ececec;
+}
+
+.resource-form h3 {
+  margin-bottom: 12px;
+}
+
+.resource-form input,
+.resource-form textarea,
+.resource-form select {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.primary-btn {
+  margin-top: 12px;
+  padding: 10px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,123,255,0.25);
+}
+
+/* =========================
+   FILTER BUTTONS
+========================= */
+
+.resource-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: #f1f3f6;
+  padding: 6px;
+  border-radius: 30px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  font-weight: 500;
+  background: transparent;
+  color: #555;
+  transition: all 0.25s ease;
+}
+
+/* Hover only when not active */
+.filter-btn:not(.active):hover {
+  background: #e0e6ed;
+  color: #222;
+}
+
+.filter-btn.active {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,123,255,0.35);
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   RESOURCE CARD
+========================= */
+
+.resource {
+  padding: 18px;
+  margin-bottom: 18px;
+  border-radius: 14px;
+  background: #f9fafc;
+  border: 1px solid #ececec;
+  transition: all 0.25s ease;
+}
+
+.resource:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+
+.resource p {
+  margin: 6px 0;
+  color: #444;
+  word-break: break-word;
+}
+
+.resource img {
+  margin-top: 10px;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* Links */
+.resource a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.resource a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-section {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.secondary-btn {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.secondary-btn:hover {
+  background: #cfd8dc;
+}
+/* =========================
+   REQUEST ENHANCEMENTS
+========================= */
+
+.primary-small-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.primary-small-btn:hover {
+  background: #0056b3;
+}
+
+.success-small-btn {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.success-small-btn:hover {
+  background: #c8e6c9;
+}
+
+.fulfilled-box {
+  background: #f5f7fa;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+.status-badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.completed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+/* =========================
+   CARD HEADER
+========================= */
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.type-badge {
+  background: #e3f2fd;
+  color: #1565c0;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+/* =========================
+   CARD MEDIA
+========================= */
+
+.card-media {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.link-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.link-btn:hover {
+  background: #0056b3;
+}
+
+/* =========================
+   META TEXT
+========================= */
+
+.meta {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* =========================
+   CARD ACTIONS
+========================= */
+
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Delete button */
+.danger-btn {
+  background: #ffe5e5;
+  color: #c62828;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.danger-btn:hover {
+  background: #ffcdd2;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .page-card {
+    padding: 25px 20px;
+  }
+}

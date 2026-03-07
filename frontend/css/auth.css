@@ -1,0 +1,23 @@
+/* =====================
+   AUTH TABS
+===================== */
+.tabs {
+  display: flex;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background: #e0e0e0;
+  transition: 0.2s ease;
+}
+
+.tabs button.active {
+  background: #007bff;
+  color: white;
+}

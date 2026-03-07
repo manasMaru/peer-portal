@@ -1,0 +1,237 @@
+/* =========================
+   PAGE WRAPPER
+========================= */
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #eef2f7, #d9e2ec);
+  padding: 40px 20px;
+}
+
+.page-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 750px;
+  padding: 35px;
+  border-radius: 22px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page-header h2 {
+  margin-bottom: 6px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 14px;
+}
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.grievance-form {
+  margin-bottom: 35px;
+}
+
+.grievance-form input,
+.grievance-form textarea {
+  width: 100%;
+}
+
+.grievance-form button {
+  margin-top: 12px;
+}
+
+/* =========================
+   GRIEVANCE LIST
+========================= */
+
+.grievance-list {
+  margin-top: 10px;
+}
+
+/* =========================
+   GRIEVANCE CARD
+========================= */
+
+.grievance {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: #f9fafc;
+  border: 1px solid #ececec;
+  transition: all 0.25s ease;
+}
+
+.grievance:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+.grievance strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.grievance p {
+  margin: 6px 0;
+  color: #444;
+  word-break: break-word;
+}
+
+/* =========================
+   STATUS BADGE
+========================= */
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.status-open {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-resolved {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+/* =========================
+   RESOLVED CARD
+========================= */
+
+.grievance.resolved {
+  background-color: #f1f8f4;
+  border-left: 6px solid #2e7d32;
+}
+
+/* =========================
+   ACTION ROW
+========================= */
+
+.action-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.action-row input {
+  flex: 1;
+  min-width: 160px;
+}
+
+/* =========================
+   SMALL BUTTONS
+========================= */
+
+.small-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s ease;
+  font-weight: 500;
+}
+
+.reply-btn {
+  background: #007bff;
+  color: white;
+}
+
+.reply-btn:hover {
+  background: #0056b3;
+}
+
+.delete-btn {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.delete-btn:hover {
+  background: #f1b0b7;
+}
+
+.resolve-btn {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.resolve-btn:hover {
+  background: #badbcc;
+}
+
+/* =========================
+   REPLIES
+========================= */
+
+.reply {
+  background: #ffffff;
+  padding: 9px 13px;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  border-left: 3px solid #007bff;
+  color: #333;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-section {
+  text-align: center;
+  margin-top: 35px;
+}
+
+.secondary-btn {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-weight: 500;
+}
+
+.secondary-btn:hover {
+  background: #cfd8dc;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .page-card {
+    padding: 25px 20px;
+  }
+
+  .action-row {
+    flex-direction: column;
+  }
+}

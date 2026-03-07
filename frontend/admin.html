@@ -2,29 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel</title>
-  <link rel="stylesheet" href="./css/style.css" />
+
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body>
 
-  <div class="container">
-    <h2>Admin Panel</h2>
+  <div class="page-wrapper">
 
-    <h3>All Grievances</h3>
-    <div id="adminGrievanceList"></div>
+    <div class="page-card">
 
-    <hr />
+      <!-- ================= HEADER ================= -->
+      <div class="page-header">
+        <h2>🛠 Admin Panel</h2>
+        <p class="subtitle">
+          Manage grievances, resources and requests
+        </p>
+      </div>
 
-    <h3>All Resources</h3>
-    <div id="adminResourceList"></div>
+      <!-- ================= CONTENT ================= -->
+      <div class="admin-container">
 
-    <hr />
+        <!-- ===== GRIEVANCES ===== -->
+        <section class="admin-section">
 
-    <h3>All Resource Requests</h3>
-    <div id="adminRequestList"></div>
+          <div class="admin-section-header" data-target="adminGrievanceList">
+            <h3>📢 All Grievances</h3>
+            <span class="toggle-icon">▼</span>
+          </div>
 
-    <br />
-    <button id="backBtn">⬅ Back to Dashboard</button>
+          <div id="adminGrievanceList" class="admin-list"></div>
+
+        </section>
+
+
+        <!-- ===== RESOURCES ===== -->
+        <section class="admin-section">
+
+          <div class="admin-section-header" data-target="adminResourceList">
+            <h3>📚 All Resources</h3>
+            <span class="toggle-icon">▼</span>
+          </div>
+
+          <div id="adminResourceList" class="admin-list"></div>
+
+        </section>
+
+
+        <!-- ===== REQUESTS ===== -->
+        <section class="admin-section">
+
+          <div class="admin-section-header" data-target="adminRequestList">
+            <h3>📦 All Resource Requests</h3>
+            <span class="toggle-icon">▼</span>
+          </div>
+
+          <div id="adminRequestList" class="admin-list"></div>
+
+        </section>
+
+      </div>
+
+      <!-- ================= BACK BUTTON ================= -->
+      <div class="back-section">
+        <button id="backBtn" class="secondary-btn">
+          ⬅ Back to Dashboard
+        </button>
+      </div>
+
+    </div>
+
   </div>
 
   <script type="module" src="./js/admin.js"></script>

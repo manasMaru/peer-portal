@@ -140,7 +140,6 @@ async function loadResources() {
   allResources = await res.json();
   renderResources();
 }
-
 function renderResources() {
   const list = document.getElementById("resourceList");
   list.innerHTML = "";
@@ -159,29 +158,36 @@ function renderResources() {
     div.className = "resource";
 
     div.innerHTML = `
-      <strong>${r.title}</strong>
+      <div class="card-header">
+        <strong>${r.title}</strong>
+        <span class="type-badge">${r.type}</span>
+      </div>
+
       <p>${r.description || ""}</p>
 
-      ${
-        r.type === "digital"
-          ? (r.link
-              ? `<a href="${r.link}" target="_blank">Open Resource</a><br/>`
-              : `<small>No link provided</small><br/>`)
-          : (r.image_url
-              ? `<img src="${r.image_url}" width="150"/><br/>`
-              : `<small>No image available</small><br/>`)
-      }
+      <div class="card-media">
+        ${
+          r.type === "digital"
+            ? (r.link
+                ? `<a href="${r.link}" target="_blank" class="link-btn">Open Resource</a>`
+                : `<small>No link provided</small>`)
+            : (r.image_url
+                ? `<img src="${r.image_url}" />`
+                : `<small>No image available</small>`)
+        }
+      </div>
 
       ${
         r.type === "physical" && r.contact_details
-          ? `<small>Contact: ${r.contact_details}</small><br/>`
+          ? `<small class="meta">Contact: ${r.contact_details}</small>`
           : ""
       }
 
-      <small>Shared by: ${r.email}</small><br/>
+      <small class="meta">Shared by: ${r.email}</small>
 
-      ${showDelete ? `<button data-delete="${r.id}">Delete</button>` : ""}
-      <hr/>
+      <div class="card-actions">
+        ${showDelete ? `<button class="danger-btn" data-delete="${r.id}">Delete</button>` : ""}
+      </div>
     `;
 
     list.appendChild(div);
@@ -258,72 +264,105 @@ async function loadRequests() {
 
     let actionSection = "";
 
+    // ================================
+    // OPEN
+    // ================================
     if (req.status === "open" && req.created_by != userId) {
-      actionSection = `<button data-offer="${req.id}">Offer Resource</button>`;
-    }
-
-    if (req.status === "fulfilled") {
-      actionSection = `
-        <p><strong>Provided by:</strong> ${req.provider_email}</p>
-
-        ${
-          req.type === "digital"
-            ? (req.fulfillment_link
-                ? `<a href="${req.fulfillment_link}" target="_blank">Open Resource</a><br/>`
-                : "")
-            : (req.fulfillment_link
-                ? `<img src="${req.fulfillment_link}" width="150"/><br/>`
-                : "")
-        }
-
-        ${
-          req.type === "physical" && req.contact_details
-            ? `<small>Provider Contact: ${req.contact_details}</small><br/>`
-            : ""
-        }
-
-        ${
-          req.created_by == userId
-            ? `<button data-received="${req.id}">Mark as Received</button>`
-            : ""
-        }
+      actionSection += `
+        <button class="primary-small-btn" data-offer="${req.id}">
+          Offer Resource
+        </button>
       `;
     }
 
-    if (req.status === "received") {
-      actionSection = `<p><strong>Status:</strong> Completed ✅</p>`;
+    // ================================
+    // FULFILLED
+    // ================================
+    if (req.status === "fulfilled") {
+      actionSection += `
+        <div class="fulfilled-box">
+          <small><strong>Provided by:</strong> ${req.provider_email}</small>
+
+          ${
+            req.type === "digital"
+              ? (req.fulfillment_link
+                  ? `<a href="${req.fulfillment_link}" target="_blank" class="link-btn">Open Resource</a>`
+                  : "")
+              : (req.fulfillment_link
+                  ? `<img src="${req.fulfillment_link}" />`
+                  : "")
+          }
+
+          ${
+            req.type === "physical" && req.contact_details
+              ? `<small>Provider Contact: ${req.contact_details}</small>`
+              : ""
+          }
+        </div>
+      `;
+
+      if (req.created_by == userId) {
+        actionSection += `
+          <button class="success-small-btn" data-received="${req.id}">
+            Mark as Received
+          </button>
+        `;
+      }
     }
 
+    // ================================
+    // RECEIVED
+    // ================================
+    if (req.status === "received") {
+      actionSection += `
+        <div class="status-badge completed">
+          Completed ✅
+        </div>
+      `;
+    }
+
+    // ================================
+    // CARD STRUCTURE
+    // ================================
     const div = document.createElement("div");
     div.className = "resource";
 
     div.innerHTML = `
-      <strong>${req.title}</strong>
+      <div class="card-header">
+        <strong>${req.title}</strong>
+        <span class="type-badge">${req.type}</span>
+      </div>
+
       <p>${req.description}</p>
 
       ${
         req.image_url
-          ? `<img src="${req.image_url}" width="150"/><br/>`
+          ? `<div class="card-media"><img src="${req.image_url}" /></div>`
           : ""
       }
 
-      <small>Requested by: ${req.requester_email}</small><br/>
+      <small class="meta">Requested by: ${req.requester_email}</small>
+
       ${
         req.requester_contact
-          ? `<small>Requester Contact: ${req.requester_contact}</small><br/>`
+          ? `<small class="meta">Requester Contact: ${req.requester_contact}</small>`
           : ""
       }
-      <small>Status: ${req.status}</small><br/>
 
-      ${actionSection}
+      <small class="meta">Status: ${req.status}</small>
 
-      ${showDelete ? `<button data-delete-request="${req.id}">Delete</button>` : ""}
-      <hr/>
+      <div class="card-actions">
+        ${actionSection}
+        ${showDelete ? `<button class="danger-btn" data-delete-request="${req.id}">Delete</button>` : ""}
+      </div>
     `;
 
     list.appendChild(div);
   });
 
+  // ================================
+  // BUTTON EVENTS (UNCHANGED LOGIC)
+  // ================================
   document.querySelectorAll("[data-offer]").forEach(btn => {
     btn.onclick = () => offerResource(btn.dataset.offer);
   });
