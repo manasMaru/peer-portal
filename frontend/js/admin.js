@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // =======================================================
-// GRIEVANCES
+// GRIEVANCES (ADMIN FULL CONTROL)
 // =======================================================
 
 async function loadGrievances() {
@@ -32,24 +32,117 @@ async function loadGrievances() {
   const list = document.getElementById("adminGrievanceList");
   list.innerHTML = "";
 
-  grievances.forEach(g => {
+  for (const g of grievances) {
+
     const div = document.createElement("div");
     div.className = "grievance";
 
     div.innerHTML = `
       <strong>${g.title}</strong>
       <p>${g.description}</p>
+      <small><strong>Status:</strong> ${g.is_resolved ? "Resolved ✅" : "Open"}</small><br/>
       <small><strong>By:</strong> ${g.email}</small><br/>
+
+      <input type="text" id="admin-reply-${g.id}" placeholder="Write reply..." />
+      <button data-admin-reply="${g.id}">Reply</button>
+
+      ${
+        !g.is_resolved
+          ? `<button data-admin-resolve="${g.id}">Mark Resolved</button>`
+          : ""
+      }
+
       <button data-delete-grievance="${g.id}">Delete</button>
+
+      <div id="admin-replies-${g.id}" style="margin-left:15px;"></div>
+      <hr/>
     `;
 
     list.appendChild(div);
-  });
 
+    loadReplies(g.id);
+  }
+
+  // Delete
   document.querySelectorAll("[data-delete-grievance]").forEach(btn => {
     btn.onclick = () => deleteGrievance(btn.dataset.deleteGrievance);
   });
+
+  // Reply
+  document.querySelectorAll("[data-admin-reply]").forEach(btn => {
+    btn.onclick = () => addAdminReply(btn.dataset.adminReply);
+  });
+
+  // Resolve
+  document.querySelectorAll("[data-admin-resolve]").forEach(btn => {
+    btn.onclick = () => resolveGrievance(btn.dataset.adminResolve);
+  });
 }
+
+
+// ==============================
+// LOAD REPLIES
+// ==============================
+
+async function loadReplies(grievanceId) {
+  const res = await fetch(`${API_URL}/replies/${grievanceId}`);
+  const replies = await res.json();
+
+  const box = document.getElementById(`admin-replies-${grievanceId}`);
+  box.innerHTML = "";
+
+  replies.forEach(r => {
+    box.innerHTML += `
+      <p>↳ <strong>${r.email}</strong>: ${r.message}</p>
+    `;
+  });
+}
+
+
+// ==============================
+// ADMIN ADD REPLY
+// ==============================
+
+async function addAdminReply(grievanceId) {
+  const input = document.getElementById(`admin-reply-${grievanceId}`);
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  await fetch(`${API_URL}/replies/${grievanceId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: userId,
+      message
+    })
+  });
+
+  input.value = "";
+  loadReplies(grievanceId);
+}
+
+
+// ==============================
+// ADMIN RESOLVE (FIXED)
+// ==============================
+
+async function resolveGrievance(grievanceId) {
+  await fetch(`${API_URL}/grievances/${grievanceId}/resolve`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: userId
+    })
+  });
+
+  loadGrievances();
+}
+
+
+// ==============================
+// DELETE GRIEVANCE
+// ==============================
 
 async function deleteGrievance(id) {
   if (!confirm("Delete this grievance?")) return;
@@ -57,7 +150,9 @@ async function deleteGrievance(id) {
   await fetch(`${API_URL}/grievances/${id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user_id: userId })
+    body: JSON.stringify({
+      user_id: userId
+    })
   });
 
   loadGrievances();
@@ -100,8 +195,8 @@ async function loadResources() {
       }
 
       <small><strong>Shared by:</strong> ${r.email}</small><br/>
-
       <button data-delete-resource="${r.id}">Delete</button>
+      <hr/>
     `;
 
     list.appendChild(div);
@@ -118,7 +213,9 @@ async function deleteResource(id) {
   await fetch(`${API_URL}/resources/${id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user_id: userId })
+    body: JSON.stringify({
+      user_id: userId
+    })
   });
 
   loadResources();
@@ -126,7 +223,7 @@ async function deleteResource(id) {
 
 
 // =======================================================
-// REQUESTS (FINAL CORRECT VERSION)
+// REQUESTS
 // =======================================================
 
 async function loadRequests() {
@@ -194,6 +291,7 @@ async function loadRequests() {
       ${fulfillmentSection}
 
       <button data-delete-request="${req.id}">Delete</button>
+      <hr/>
     `;
 
     list.appendChild(div);
@@ -210,7 +308,9 @@ async function deleteRequest(id) {
   await fetch(`${API_URL}/requests/${id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user_id: userId })
+    body: JSON.stringify({
+      user_id: userId
+    })
   });
 
   loadRequests();

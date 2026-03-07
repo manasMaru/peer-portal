@@ -4,6 +4,12 @@ import { requireAuth } from "./utils.js";
 const userId = requireAuth();
 const userRole = localStorage.getItem("role");
 
+let allResources = [];
+let currentFilter = "";
+
+// =============================
+// INIT
+// =============================
 document.addEventListener("DOMContentLoaded", () => {
 
   showResourcesSection();
@@ -27,6 +33,21 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", () => {
       window.location.href = "dashboard.html";
     });
+
+  // FILTER BUTTONS
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+      document.querySelectorAll(".filter-btn")
+        .forEach(b => b.classList.remove("active"));
+
+      btn.classList.add("active");
+
+      currentFilter = btn.dataset.type;
+      renderResources();
+    });
+  });
+
 });
 
 
@@ -116,12 +137,20 @@ function clearResourceForm() {
 
 async function loadResources() {
   const res = await fetch(`${API_URL}/resources`);
-  const resources = await res.json();
+  allResources = await res.json();
+  renderResources();
+}
 
+function renderResources() {
   const list = document.getElementById("resourceList");
   list.innerHTML = "";
 
-  resources.forEach(r => {
+  const filtered =
+    currentFilter === ""
+      ? allResources
+      : allResources.filter(r => r.type === currentFilter);
+
+  filtered.forEach(r => {
 
     const showDelete =
       r.created_by == userId || userRole === "admin";
@@ -152,6 +181,7 @@ async function loadResources() {
       <small>Shared by: ${r.email}</small><br/>
 
       ${showDelete ? `<button data-delete="${r.id}">Delete</button>` : ""}
+      <hr/>
     `;
 
     list.appendChild(div);
@@ -176,7 +206,7 @@ async function deleteResource(id) {
 
 
 // =======================================================
-// REQUEST SECTION
+// REQUEST SECTION (UNCHANGED LOGIC)
 // =======================================================
 
 async function addRequest() {
@@ -288,6 +318,7 @@ async function loadRequests() {
       ${actionSection}
 
       ${showDelete ? `<button data-delete-request="${req.id}">Delete</button>` : ""}
+      <hr/>
     `;
 
     list.appendChild(div);

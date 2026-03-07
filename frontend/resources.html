@@ -10,11 +10,18 @@
   <div class="container">
     <h2>Resources</h2>
 
+    <!-- ============================= -->
     <!-- TOGGLE BUTTONS -->
+    <!-- ============================= -->
     <div class="box resource-toggle">
-      <button id="showResourcesBtn" class="active">Available Resources</button>
-      <button id="showRequestsBtn">Resource Requests</button>
+      <button id="showResourcesBtn" class="active">
+        Available Resources
+      </button>
+      <button id="showRequestsBtn">
+        Resource Requests
+      </button>
     </div>
+
 
     <!-- ============================= -->
     <!-- RESOURCE SECTION -->
@@ -23,6 +30,8 @@
 
       <!-- ADD RESOURCE -->
       <div class="box">
+        <h3>Add Resource</h3>
+
         <input type="text" id="rTitle" placeholder="Resource title" />
         <textarea id="rDesc" placeholder="Description"></textarea>
 
@@ -32,7 +41,7 @@
           <option value="digital">Digital</option>
         </select>
 
-        <!-- DIGITAL -->
+        <!-- DIGITAL INPUT -->
         <input
           type="text"
           id="rLink"
@@ -40,13 +49,14 @@
           class="hidden"
         />
 
-        <!-- PHYSICAL -->
+        <!-- PHYSICAL INPUTS -->
         <input
           type="text"
           id="rImage"
           placeholder="Image URL of product"
           class="hidden"
         />
+
         <input
           type="text"
           id="rContact"
@@ -71,6 +81,7 @@
 
     </div>
 
+
     <!-- ============================= -->
     <!-- REQUEST SECTION -->
     <!-- ============================= -->
@@ -79,8 +90,16 @@
       <div class="box">
         <h3>Request a Resource</h3>
 
-        <input type="text" id="reqTitle" placeholder="Requested resource title" />
-        <textarea id="reqDesc" placeholder="Describe what you need"></textarea>
+        <input
+          type="text"
+          id="reqTitle"
+          placeholder="Requested resource title"
+        />
+
+        <textarea
+          id="reqDesc"
+          placeholder="Describe what you need"
+        ></textarea>
 
         <select id="reqType">
           <option value="">Select type</option>
@@ -94,7 +113,6 @@
           placeholder="Optional image link"
         />
 
-        <!-- ✅ NEW: REQUESTER CONTACT -->
         <input
           type="text"
           id="reqContact"
@@ -109,6 +127,7 @@
       <div id="requestList"></div>
 
     </div>
+
 
     <br />
     <button id="backBtn">⬅ Back to Dashboard</button>

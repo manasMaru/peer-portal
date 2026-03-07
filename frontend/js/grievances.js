@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadGrievances();
 });
 
+
 // ==============================
 // LOAD GRIEVANCES
 // ==============================
@@ -27,12 +28,16 @@ async function loadGrievances() {
   list.innerHTML = "";
 
   grievances.forEach(g => {
+
     const div = document.createElement("div");
     div.className = "grievance" + (g.is_resolved ? " resolved" : "");
 
-    // show delete only if owner OR admin
-    const showDelete =
-      g.created_by == userId || userRole === "admin";
+    // ✅ Owner OR Admin
+    const isOwner = g.created_by == userId;
+    const isAdmin = userRole === "admin";
+
+    const showDelete = isOwner || isAdmin;
+    const showResolve = (isOwner || isAdmin) && !g.is_resolved;
 
     div.innerHTML = `
       <strong>${g.title}</strong>
@@ -43,7 +48,7 @@ async function loadGrievances() {
       <button data-reply="${g.id}">Reply</button>
 
       ${
-        !g.is_resolved
+        showResolve
           ? `<button data-resolve="${g.id}">Mark Resolved</button>`
           : ""
       }
@@ -77,6 +82,7 @@ async function loadGrievances() {
   });
 }
 
+
 // ==============================
 // ADD GRIEVANCE
 // ==============================
@@ -102,6 +108,7 @@ async function addGrievance() {
   loadGrievances();
 }
 
+
 // ==============================
 // ADD REPLY
 // ==============================
@@ -122,6 +129,7 @@ async function addReply(id) {
   loadReplies(id);
 }
 
+
 // ==============================
 // LOAD REPLIES
 // ==============================
@@ -137,26 +145,34 @@ async function loadReplies(id) {
   });
 }
 
+
 // ==============================
-// RESOLVE
+// RESOLVE (OWNER OR ADMIN)
 // ==============================
-function resolveGrievance(id) {
-  fetch(`${API_URL}/grievances/${id}/resolve`, {
-    method: "PUT"
-  }).then(loadGrievances);
+async function resolveGrievance(id) {
+
+  await fetch(`${API_URL}/grievances/${id}/resolve`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: userId
+    })
+  });
+
+  loadGrievances();
 }
+
 
 // ==============================
 // DELETE (OWNER OR ADMIN)
 // ==============================
 async function deleteGrievance(id) {
+
   if (!confirm("Are you sure you want to delete this grievance?")) return;
 
   await fetch(`${API_URL}/grievances/${id}`, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       user_id: userId
     })
