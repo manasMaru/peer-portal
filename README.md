@@ -3,7 +3,11 @@
 A full-stack web application that enables students to collaboratively resolve grievances and share academic resources within an institution.
 
 ---
+## Live Demo
 
+https://peer-portal.netlify.app
+
+---
 ## Features
 
 ### Authentication
