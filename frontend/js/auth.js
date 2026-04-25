@@ -62,23 +62,26 @@ async function login() {
     return;
   }
 
-  const res = await fetch(`${API_URL}/auth/login`, {
+  const res = await fetch(`${API_URL}/auth/login`, {//sends login data to backend
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ email, password })//converts javaScript object to JSON
   });
 
-  const data = await res.json();
-
+  const data = await res.json();//convert backend response to Js object
+  //On the backend, res.json() sends a JS object as JSON; on the frontend, res.json() parses JSON into a JS object
+  
+  
   if (data.user_id) {
-    // ✅ Store everything needed for dashboard
+    // Store everything needed for dashboard to local storage
+    //this is our session management
     localStorage.setItem("user_id", data.user_id);
     localStorage.setItem("role", data.role);
     localStorage.setItem("email", email);
 
-    window.location.href = "dashboard.html";
+    window.location.href = "dashboard.html";//redirect to dashboard after login
   } else {
-    msg.innerText = data.message;
+    msg.innerText = data.message;//if login fails , show backend error message
   }
 }
 

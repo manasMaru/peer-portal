@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const pool = require("../config/db");
 
 exports.signup = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body;//destructuring, same as, const email = req.body.email; const password = req.body.password;
 
   if (!email || !password)
     return res.status(400).json({ message: "Email and password required" });
@@ -31,7 +31,7 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body;//destructuring, same as, const email = req.body.email; const password = req.body.password;
 
   if (!email || !password)
     return res.status(400).json({ message: "Email and password required" });

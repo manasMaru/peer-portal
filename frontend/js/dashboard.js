@@ -1,10 +1,10 @@
 import { requireAuth, logout } from "./utils.js";
 
-const userId = requireAuth();
+const userId = requireAuth();//if user_id not exist in localstorage redirect to login.html 
 const role = localStorage.getItem("role");
 const email = localStorage.getItem("email");
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {//DOMContentLoaded is a browser event that fires when the HTML is fully loaded and parsed.
 
   const grievancesBtn = document.getElementById("grievancesBtn");
   const resourcesBtn = document.getElementById("resourcesBtn");
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =============================
   // Navigation
   // =============================
-  grievancesBtn?.addEventListener("click", () => {
+  grievancesBtn?.addEventListener("click", () => {//if grievancebtn exists only 
     window.location.href = "grievances.html";
   });
 
@@ -48,20 +48,21 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn?.addEventListener("click", logout);
 
   // =============================
-  // FIXED ADMIN BUTTON LOGIC
+  // ADMIN BUTTON LOGIC
   // =============================
-  if (adminBtn) {
-    if (role === "admin") {
-      // 🔥 REMOVE hidden class for admin
-      adminBtn.classList.remove("hidden");
-
-      adminBtn.addEventListener("click", () => {
-        window.location.href = "admin.html";
-      });
-    } else {
-      // Remove completely for students
-      adminBtn.remove();
-    }
+// Check if admin button exists
+if (adminBtn) {
+  // If user is admin
+  if (role === "admin") {
+    // Show the button (remove hidden class)
+    adminBtn.classList.remove("hidden");
+    // Go to admin page on click
+    adminBtn.addEventListener("click", () => {
+      window.location.href = "admin.html";
+    });
+  } else {
+    // If NOT admin → remove button completely from the page
+    adminBtn.remove();
   }
-
+}
 });
